@@ -11,6 +11,8 @@ namespace PIDCtrl
     /// </summary>
     public partial class MainWindow : Window
     {
+        private const string FORMAT = "F3";
+
         private double Kp, Ki, Kd, Set, Val;
         private double iCtrl, dCtrl;
 
@@ -27,15 +29,22 @@ namespace PIDCtrl
             iCtrl = dCtrl = 0;
 
             theVals = new Queue<double>();
-            theVals.Enqueue(0); theVals.Enqueue(0); theVals.Enqueue(0);
+            theVals.Enqueue(0);
 
             theTimer = new Timer((obj) => {
                 double[] a = theVals.ToArray();
-                double e0 = a[2];
-                double e1 = a[1];
-                double e2 = a[0];
+                int len = a.Length;
 
-                Val = Kp * (e0 - e1);
+                double e0, e1, e2;
+                e0 = Set - a[len - 1];
+                if (len > 1)
+                    e1 = Set - a[len - 2];
+                else e1 = 0;
+                if (len > 2)
+                    e2 = Set - a[len - 3];
+                else e2 = 0;
+
+                Val += Kp * (e0 - e1);
                 Val += iCtrl * Ki * e0;
                 Val += dCtrl * Kd * (e0 - 2 * e1 + e2);
 
@@ -55,7 +64,7 @@ namespace PIDCtrl
         private void sliderKp_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             Kp = sliderKp.Value;
-            if (boxKp != null) boxKp.Text = Kp.ToString("F2");
+            if (boxKp != null) boxKp.Text = Kp.ToString(FORMAT);
         }
 
         private void boxKi_TextChanged(object sender, TextChangedEventArgs e)
@@ -68,7 +77,7 @@ namespace PIDCtrl
         private void sliderKi_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             Ki = sliderKi.Value;
-            if (boxKi != null) boxKi.Text = Ki.ToString("F2");
+            if (boxKi != null) boxKi.Text = Ki.ToString(FORMAT);
         }
 
         private void boxKd_TextChanged(object sender, TextChangedEventArgs e)
@@ -81,7 +90,7 @@ namespace PIDCtrl
         private void sliderKd_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             Kd = sliderKd.Value;
-            if (boxKd != null) boxKd.Text = Kd.ToString("F2");
+            if (boxKd != null) boxKd.Text = Kd.ToString(FORMAT);
         }
 
         private void boxSet_TextChanged(object sender, TextChangedEventArgs e)
@@ -96,14 +105,14 @@ namespace PIDCtrl
         private void sliderSet_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             Set = sliderSet.Value;
-            if (boxSet != null) boxSet.Text = Set.ToString("F2");
+            if (boxSet != null) boxSet.Text = Set.ToString(FORMAT);
 
             Val = Set;
         }
 
         private void setVal(double val)
         {
-            boxVal.Dispatcher.Invoke(() => boxVal.Text = val.ToString("F2"));
+            boxVal.Dispatcher.Invoke(() => boxVal.Text = val.ToString(FORMAT));
             sliderVal.Dispatcher.Invoke(() => sliderVal.Value = val);
         }
 
