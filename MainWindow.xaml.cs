@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Windows;
 using System.Threading;
+using System.Windows.Media;
+using System.Windows.Shapes;
 using System.Windows.Controls;
 using System.Collections.Generic;
 
@@ -12,11 +14,14 @@ namespace PIDCtrl
     public partial class MainWindow : Window
     {
         private const string FORMAT = "F3";
+        private const int BUFLEN = 1024;
+        private const double YRANGE = 2560;
 
         private double Kp, Ki, Kd, Set, Val;
         private double iCtrl, dCtrl;
 
         private Queue<double> theVals;
+        private Queue<double> graphBuffer;
 
         private Timer theTimer;
 
@@ -30,6 +35,10 @@ namespace PIDCtrl
 
             theVals = new Queue<double>();
             theVals.Enqueue(0);
+
+            graphBuffer = new Queue<double>();
+            for (int i = 0; i < BUFLEN; i++)
+                graphBuffer.Enqueue(0);
 
             theTimer = new Timer((obj) => {
                 double[] a = theVals.ToArray();
@@ -114,6 +123,29 @@ namespace PIDCtrl
         {
             boxVal.Dispatcher.Invoke(() => boxVal.Text = val.ToString(FORMAT));
             sliderVal.Dispatcher.Invoke(() => sliderVal.Value = val);
+
+            graphBuffer.Enqueue(val);
+            if (graphBuffer.Count > BUFLEN)
+                graphBuffer.Dequeue();
+
+            canvasGraph.Dispatcher.Invoke(() => {
+                canvasGraph.Children.Clear();
+                Polyline line = new Polyline
+                {
+                    Stroke = this.Foreground,
+                    StrokeThickness = 1,
+                    Points = new PointCollection()
+                };
+                double[] array = graphBuffer.ToArray();
+                double x, y;
+                for (int i = 0; i < array.Length; i++)
+                {
+                    x = (double)i / BUFLEN * canvasGraph.Width;
+                    y = canvasGraph.Height / 2 - array[i] / YRANGE * canvasGraph.Height;
+                    line.Points.Add(new Point(x, y));
+                }
+                canvasGraph.Children.Add(line);
+            });
         }
 
         private void iToggle_Click(object sender, RoutedEventArgs e)

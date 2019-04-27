@@ -5,44 +5,47 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PIDCtrl"
         mc:Ignorable="d"
-        Title="PIDCtrl" Height="320" Width="480" ResizeMode="NoResize">
+        Title="PIDCtrl" Height="640" Width="480" MinWidth="480" MinHeight="320" MaxWidth="480" MaxHeight="640" Icon="icon.ico">
     <Grid>
-        <GroupBox Header="Main" HorizontalAlignment="Left" Height="162" Margin="10,10,0,0" VerticalAlignment="Top" Width="454">
+        <GroupBox Header="Main" HorizontalAlignment="Left" Height="162" Margin="10,10,0,0" VerticalAlignment="Top" Width="452">
             <Grid>
                 <Label Content="Kp" HorizontalAlignment="Left" VerticalAlignment="Top" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Height="24" Width="40"/>
                 <TextBox x:Name="boxKp" HorizontalAlignment="Left" Height="24" Margin="45,0,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="64" VerticalContentAlignment="Center" Text="0" HorizontalContentAlignment="Center" TextChanged="boxKp_TextChanged"/>
-                <Slider x:Name="sliderKp" HorizontalAlignment="Left" Margin="114,2,0,0" VerticalAlignment="Top" Height="20" Width="328" SmallChange="0.001" Minimum="-1" ValueChanged="sliderKp_ValueChanged" Maximum="1"/>
+                <Slider x:Name="sliderKp" HorizontalAlignment="Left" Margin="114,2,0,0" VerticalAlignment="Top" Height="20" Width="316" SmallChange="0.001" Minimum="-1" ValueChanged="sliderKp_ValueChanged" Maximum="1"/>
                 <Label Content="Ki" HorizontalAlignment="Left" Margin="0,29,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Height="24" Width="40"/>
                 <TextBox x:Name="boxKi" HorizontalAlignment="Left" Height="24" Margin="45,29,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="64" VerticalContentAlignment="Center" Text="0" HorizontalContentAlignment="Center" TextChanged="boxKi_TextChanged"/>
-                <Slider x:Name="sliderKi" HorizontalAlignment="Left" Margin="114,31,0,0" VerticalAlignment="Top" Height="20" Width="328" SmallChange="0.001" Minimum="-1" ValueChanged="sliderKi_ValueChanged" Maximum="1"/>
+                <Slider x:Name="sliderKi" HorizontalAlignment="Left" Margin="114,31,0,0" VerticalAlignment="Top" Height="20" Width="316" SmallChange="0.001" Minimum="-1" ValueChanged="sliderKi_ValueChanged" Maximum="1"/>
                 <Label Content="Kd" HorizontalAlignment="Left" Margin="0,58,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Height="24" Width="40"/>
                 <TextBox x:Name="boxKd" HorizontalAlignment="Left" Height="24" Margin="45,58,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="64" VerticalContentAlignment="Center" Text="0" HorizontalContentAlignment="Center" TextChanged="boxKd_TextChanged"/>
-                <Slider x:Name="sliderKd" HorizontalAlignment="Left" Margin="114,60,0,0" VerticalAlignment="Top" Height="20" Width="328" SmallChange="0.001" Minimum="-1" ValueChanged="sliderKd_ValueChanged" Maximum="1"/>
+                <Slider x:Name="sliderKd" HorizontalAlignment="Left" Margin="114,60,0,0" VerticalAlignment="Top" Height="20" Width="316" SmallChange="0.001" Minimum="-1" ValueChanged="sliderKd_ValueChanged" Maximum="1"/>
                 <Label Content="Set" HorizontalAlignment="Left" Margin="0,87,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Height="24" Width="40"/>
                 <TextBox x:Name="boxSet" HorizontalAlignment="Left" Height="24" Margin="45,87,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="64" VerticalContentAlignment="Center" Text="0" HorizontalContentAlignment="Center" TextChanged="boxSet_TextChanged"/>
-                <Slider x:Name="sliderSet" HorizontalAlignment="Left" Margin="114,89,0,0" VerticalAlignment="Top" Height="20" Width="328" SmallChange="0.01" Minimum="-1000" Maximum="1000" ValueChanged="sliderSet_ValueChanged"/>
+                <Slider x:Name="sliderSet" HorizontalAlignment="Left" Margin="114,89,0,0" VerticalAlignment="Top" Height="20" Width="316" SmallChange="0.01" Minimum="-1000" Maximum="1000" ValueChanged="sliderSet_ValueChanged"/>
                 <Label Content="Val" HorizontalAlignment="Left" Margin="0,116,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Height="24" Width="40"/>
                 <TextBox x:Name="boxVal" HorizontalAlignment="Left" Height="24" Margin="45,116,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="64" VerticalContentAlignment="Center" RenderTransformOrigin="0.523,-0.021" IsEnabled="False" Text="0" HorizontalContentAlignment="Center"/>
-                <Slider x:Name="sliderVal" HorizontalAlignment="Left" Margin="114,118,0,0" VerticalAlignment="Top" Height="20" Width="328" SmallChange="0.01" Minimum="-1000" Maximum="1000" IsEnabled="False"/>
+                <Slider x:Name="sliderVal" HorizontalAlignment="Left" Margin="114,118,0,0" VerticalAlignment="Top" Height="20" Width="316" SmallChange="0.01" Minimum="-1000" Maximum="1000" IsEnabled="False"/>
 
             </Grid>
         </GroupBox>
-        <GroupBox Header="Misc" HorizontalAlignment="Left" Height="104" Margin="10,177,0,0" VerticalAlignment="Top" Width="454">
+        <GroupBox Header="Misc" Margin="10,177,0,0" Height="102" VerticalAlignment="Top" HorizontalAlignment="Left" Width="452">
             <Grid >
-                <Button x:Name="iToggle" Content="Toggle Integrator" HorizontalAlignment="Left" Height="26" Margin="170,9,0,0" VerticalAlignment="Top" Width="110" Click="iToggle_Click"/>
-                <Button x:Name="dToggle" Content="Toggle Differentiator" HorizontalAlignment="Left" Height="26" Margin="285,9,0,0" VerticalAlignment="Top" Width="147" Click="dToggle_Click"/>
+                <Button x:Name="iToggle" Content="Toggle Integrator" HorizontalAlignment="Left" Height="26" Margin="175,10,0,0" VerticalAlignment="Top" Width="110" Click="iToggle_Click"/>
+                <Button x:Name="dToggle" Content="Toggle Differentiator" HorizontalAlignment="Left" Height="26" Margin="290,10,0,0" VerticalAlignment="Top" Width="140" Click="dToggle_Click"/>
                 <GroupBox Header="State" HorizontalAlignment="Left" Width="160" Margin="5,0,0,10">
                     <Grid>
                         <CheckBox x:Name="iState" Content="Integrator State" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,8,0,0" IsEnabled="False"/>
                         <CheckBox x:Name="dState" Content="Differentiator State" HorizontalAlignment="Left" Margin="10,27,0,0" VerticalAlignment="Top" IsEnabled="False"/>
                     </Grid>
                 </GroupBox>
-                <Button x:Name="btnStart" Content="Start" HorizontalAlignment="Left" Margin="299,46,0,0" VerticalAlignment="Top" Width="64" Height="26" Click="btnStart_Click"/>
-                <Label Content="Freq" HorizontalAlignment="Left" Margin="170,45,0,0" VerticalAlignment="Top" Height="26" Width="41" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
-                <TextBox x:Name="boxFreq" HorizontalAlignment="Left" Height="27" Margin="216,46,0,0" TextWrapping="Wrap" Text="10" VerticalAlignment="Top" Width="48" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
-                <Button x:Name="btnStop" Content="Stop" HorizontalAlignment="Left" Margin="368,46,0,0" VerticalAlignment="Top" Width="64" Height="26" Click="btnStop_Click" />
-                <CheckBox x:Name="boxState" HorizontalAlignment="Left" Margin="273,51,0,0" VerticalAlignment="Top" Width="16" IsEnabled="False"/>
+                <Button x:Name="btnStart" Content="Start" HorizontalAlignment="Left" Margin="329,44,0,0" VerticalAlignment="Top" Width="48" Height="26" Click="btnStart_Click"/>
+                <Label Content="Freq" HorizontalAlignment="Left" Margin="170,44,0,0" VerticalAlignment="Top" Height="26" Width="41" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
+                <TextBox x:Name="boxFreq" HorizontalAlignment="Left" Height="27" Margin="216,44,0,0" TextWrapping="Wrap" Text="10" VerticalAlignment="Top" Width="69" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
+                <Button x:Name="btnStop" Content="Stop" HorizontalAlignment="Left" Margin="382,44,0,0" VerticalAlignment="Top" Width="48" Height="26" Click="btnStop_Click" />
+                <CheckBox x:Name="boxState" HorizontalAlignment="Left" Margin="308,50,0,0" VerticalAlignment="Top" Width="16" IsEnabled="False"/>
             </Grid>
+        </GroupBox>
+        <GroupBox Header="Graph" HorizontalAlignment="Left" Height="313" Margin="10,286,0,0" VerticalAlignment="Top" Width="452">
+            <Canvas x:Name="canvasGraph" Margin="10,10,0,0" HorizontalAlignment="Left" Width="420" Height="271" VerticalAlignment="Top"/>
         </GroupBox>
 
     </Grid>
